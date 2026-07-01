@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="max-width:560px">
+  <div style="position:relative">
+    <span style="position:absolute;left:13px;top:50%;transform:translateY(-50%);font-family:'Material Symbols Outlined';font-size:19px;color:#d92d20;pointer-events:none">search</span>
+    <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="{{ searchPlaceholder }}" autoComplete="off" style="width:100%;padding:11px 40px 11px 40px;border:1px solid #d92d20;border-radius:8px;font-size:14px;color:#2f3438;background:#fff;outline:none">
+    <span onClick="{{ onToggle }}" title="Xem danh sách" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-family:'Material Symbols Outlined';font-size:22px;color:#d92d20;cursor:pointer">arrow_drop_down</span>
+    <sc-if value="{{ showSuggest }}">
+      <div style="position:absolute;left:0;right:0;top:calc(100% + 4px);background:#fff;border:1px solid #f3cfcc;border-radius:10px;box-shadow:0 8px 24px rgba(20,30,40,.12);z-index:20;overflow:hidden;max-height:280px;overflow-y:auto">
+        <sc-for list="{{ suggestions }}" as="o" hint-placeholder-count="3">
+          <div data-key="{{ o.v }}" onClick="{{ onPick }}" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid #f5eeed" style-hover="background:#fdf3f2">
+            <div style="font-size:14px;color:#2f3438;font-weight:500">{{ o.t }}</div>
+            <div style="font-size:12px;color:#b0524d;margin-top:2px">{{ o.cond }}</div>
+            <div style="font-size:12px;color:#26B24C;margin-top:1px">{{ o.licHint }}</div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ noResult }}">
+          <div style="padding:11px 14px;font-size:13px;color:#9aa0a8">Không tìm thấy mã ngành phù hợp</div>
+        </sc-if>
+        <sc-if value="{{ canAddFree }}">
+          <div onClick="{{ onAddFree }}" style="display:flex;align-items:center;gap:7px;padding:11px 14px;font-size:14px;font-weight:500;color:#d92d20;cursor:pointer;background:#fdf6f5" style-hover="background:#fbe9e7"><span style="font-family:'Material Symbols Outlined';font-size:17px">add</span>Thêm "{{ query }}" (Khác)</div>
+        </sc-if>
+      </div>
+    </sc-if>
+  </div>
+  <sc-if value="{{ hasChips }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+      <sc-for list="{{ chips }}" as="c" hint-placeholder-count="1">
+        <span style="display:flex;align-items:center;gap:6px;border:1px solid #d92d20;color:#d92d20;border-radius:16px;padding:5px 12px;font-size:13px">{{ c.label }}<span data-idx="{{ c.idx }}" onClick="{{ onRemove }}" style="font-family:'Material Symbols Outlined';font-size:15px;cursor:pointer">close</span></span>
+      </sc-for>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:560,&quot;height&quot;:260},&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;full&quot;,&quot;canhan&quot;],&quot;default&quot;:&quot;full&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;seedLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;value&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;Array&lt;{key:string,label:string}&gt;&quot;},&quot;onChange&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(chips:any[])=&gt;void&quot;}}">
+class Component extends DCLogic {
+  state = { query:'', chips:null, open:false };
+
+  catalog() {
+    if (this.props.mode === 'canhan') return [
+      {v:'ca_rong',t:'Buôn bán rong (buôn bán dạo)',cond:'',lic:[]},
+      {v:'ca_vat',t:'Buôn bán vặt',cond:'',lic:[]},
+      {v:'ca_quavat',t:'Bán quà vặt',cond:'',lic:[]},
+      {v:'ca_chuyen',t:'Buôn chuyến',cond:'',lic:[]},
+    ];
+    return [
+      {v:'c1',t:'4711 – Bán lẻ trong các cửa hàng kinh doanh tổng hợp',cond:'Kinh doanh thực phẩm thuộc lĩnh vực quản lý chuyên ngành',lic:['Giấy chứng nhận cơ sở đủ điều kiện an toàn thực phẩm']},
+      {v:'c2',t:'4719 – Bán lẻ khác trong các cửa hàng kinh doanh tổng hợp',cond:'',lic:[]},
+      {v:'c3',t:'4771 – Bán lẻ dược phẩm và dụng cụ y tế trong các cửa hàng chuyên doanh',cond:'Kinh doanh dược',lic:['Giấy chứng nhận đủ điều kiện kinh doanh dược']},
+      {v:'c4',t:'4772 – Bán lẻ hàng hóa khác mới trong các cửa hàng chuyên doanh',cond:'Hoạt động mua bán hàng hóa của nhà cung cấp dịch vụ nước ngoài tại Việt Nam',lic:[]},
+      {v:'c5',t:'4761 – Bán lẻ thiết bị thông tin và truyền thông trong các cửa hàng chuyên doanh',cond:'Kinh doanh sản phẩm, dịch vụ an ninh mạng',lic:['Giấy phép nhập khẩu sản phẩm an ninh mạng']},
+      {v:'c6',t:'4791 – Bán lẻ theo hình thức đặt hàng bưu điện hoặc internet',cond:'Hoạt động thương mại điện tử',lic:['Đăng ký website/ứng dụng cung cấp dịch vụ TMĐT']},
+      {v:'c7',t:'4641 – Bán buôn vải, hàng may sẵn, giày dép',cond:'',lic:[]},
+      {v:'c8',t:'4649 – Bán buôn đồ dùng khác cho gia đình',cond:'Kinh doanh thiết bị y tế',lic:['Giấy chứng nhận lưu hành tự do']},
+      {v:'c9',t:'4711 – Bán lẻ lương thực, thực phẩm, đồ uống',cond:'Kinh doanh thực phẩm thuộc lĩnh vực quản lý chuyên ngành',lic:['Giấy chứng nhận cơ sở đủ điều kiện an toàn thực phẩm']},
+      {v:'c10',t:'5610 – Nhà hàng và các dịch vụ ăn uống phục vụ lưu động',cond:'Kinh doanh thực phẩm thuộc lĩnh vực quản lý chuyên ngành',lic:['Giấy chứng nhận cơ sở đủ điều kiện an toàn thực phẩm']},
+      {v:'c11',t:'5630 – Dịch vụ phục vụ đồ uống',cond:'Kinh doanh thực phẩm thuộc lĩnh vực quản lý chuyên ngành',lic:['Giấy chứng nhận cơ sở đủ điều kiện an toàn thực phẩm']},
+      {v:'c12',t:'9602 – Cắt tóc, làm đầu, gội đầu',cond:'',lic:[]},
+      {v:'c13',t:'4773 – Bán lẻ mỹ phẩm và vật phẩm vệ sinh',cond:'Sản xuất, kinh doanh mỹ phẩm',lic:['Phiếu công bố sản phẩm mỹ phẩm']},
+      {v:'c14',t:'4322 – Lắp đặt hệ thống cấp, thoát nước, sưởi và điều hoà',cond:'',lic:[]},
+      {v:'c15',t:'4663 – Bán buôn vật liệu, thiết bị lắp đặt khác trong xây dựng',cond:'',lic:[]},
+      {v:'c16',t:'4321 – Lắp đặt hệ thống điện',cond:'',lic:[]},
+      {v:'c17',t:'6201 – Lập trình máy vi tính',cond:'',lic:[]},
+      {v:'c18',t:'6202 – Tư vấn máy vi tính và quản trị hệ thống',cond:'',lic:[]},
+      {v:'c19',t:'6209 – Hoạt động dịch vụ công nghệ thông tin và dịch vụ khác liên quan đến máy vi tính',cond:'Kinh doanh sản phẩm, dịch vụ an ninh mạng',lic:['Giấy phép kinh doanh sản phẩm, dịch vụ an toàn thông tin mạng']},
+      {v:'c20',t:'4933 – Vận tải hàng hóa bằng đường bộ',cond:'Kinh doanh vận tải bằng xe ô tô',lic:['Giấy phép kinh doanh vận tải bằng xe ô tô']},
+      {v:'c21',t:'7911 – Đại lý du lịch',cond:'Kinh doanh dịch vụ lữ hành',lic:['Giấy phép kinh doanh dịch vụ lữ hành']},
+      {v:'c22',t:'5510 – Dịch vụ lưu trú ngắn ngày',cond:'',lic:['Đáp ứng điều kiện về an ninh, trật tự']},
+      {v:'c23',t:'6611 – Quản lý thị trường tài chính',cond:'Hoạt động kinh doanh chứng khoán',lic:['Giấy phép thành lập và hoạt động']},
+      {v:'c24',t:'6499 – Hoạt động dịch vụ tài chính khác chưa được phân vào đâu',cond:'Hoạt động cung ứng dịch vụ trung gian thanh toán',lic:['Giấy phép hoạt động cung ứng dịch vụ trung gian thanh toán']},
+    ];
+  }
+
+  isControlled() { return typeof this.props.onChange === 'function'; }
+
+  getChips() {
+    if (this.isControlled()) return this.props.value || [];
+    const c = this.state.chips;
+    if (c !== null) return c;
+    const s = this.props.seedLabel;
+    return s ? [{ key:'seed', label:s }] : [];
+  }
+
+  commit(next) {
+    if (this.isControlled()) { this.props.onChange(next); this.setState({ query:'' }); }
+    else this.setState({ chips: next, query:'' });
+  }
+
+  renderVals() {
+    const chips = this.getChips();
+    const q = (this.state.query||'').trim().toLowerCase();
+    const open = this.state.open || q.length > 0;
+    const base = this.catalog().filter(o => !chips.some(x=>x.key===o.v));
+    const suggestions = open
+      ? (q ? base.filter(o => (o.t + ' ' + (o.cond||'') + ' ' + (o.lic||[]).join(' ')).toLowerCase().includes(q)) : base)
+          .slice(0,120)
+          .map(o => ({ ...o, licHint: (o.lic && o.lic.length) ? ('Giấy phép con: ' + o.lic.join('; ')) : 'Không yêu cầu giấy phép con' }))
+      : [];
+    const canhan = this.props.mode === 'canhan';
+    return {
+      searchPlaceholder: canhan ? 'Tìm loại hình buôn bán...' : 'Tìm mã ngành nghề cấp 4...',
+      query: this.state.query,
+      chips: chips.map((c,i)=>({ idx:i, label:c.label })),
+      hasChips: chips.length > 0,
+      suggestions,
+      showSuggest: open,
+      canAddFree: q.length > 0,
+      noResult: q.length > 0 && suggestions.length === 0,
+      onToggle: () => this.setState(s => ({ open: !s.open })),
+      onQuery: (e) => this.setState({ query: e.target.value, open: true }),
+      onPick: (e) => {
+        const v = e.currentTarget.dataset.key;
+        const opt = this.catalog().find(o=>o.v===v);
+        if (!opt) return;
+        const cur = this.getChips();
+        this.setState({ open:false });
+        if (cur.some(x=>x.key===v)) { this.setState({ query:'' }); return; }
+        this.commit([...cur, { key:v, label:opt.t }]);
+      },
+      onAddFree: () => {
+        const t = (this.state.query||'').trim();
+        if (!t) return;
+        this.setState({ open:false });
+        this.commit([...this.getChips(), { key:'other_'+Date.now(), label:t }]);
+      },
+      onRemove: (e) => {
+        const i = +e.currentTarget.dataset.idx;
+        this.commit(this.getChips().filter((_,j)=>j!==i));
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
