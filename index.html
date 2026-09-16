@@ -753,52 +753,7 @@ button{font-family:inherit;cursor:pointer}
             </sc-if>
 
             <div style="border-top:1px dashed #f0c4c0;margin:20px 0 14px"></div>
-            <div style="font-size:14px;font-weight:600;color:#d92d20;margin-bottom:12px">2. Giấy thoả thuận</div>
-            <div style="display:flex;flex-direction:column;gap:18px">
-
-              <div>
-                <div style="font-size:14px;font-weight:600;color:#d92d20;margin-bottom:4px">Thoả thuận pháp lý</div>
-                <div>
-                  <div style="margin:10px 0 0 0">
-                    <div style="display:flex;gap:28px">
-                      <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:#d92d20;cursor:pointer">
-                        <input readOnly type="radio" name="tt-join" checked="{{ thoaThuanCo }}" data-val="co" onClick="{{ onThoaThuanJoin }}" style="width:16px;height:16px;accent-color:#d92d20;cursor:pointer">Có tham gia
-                      </label>
-                      <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:#d92d20;cursor:pointer">
-                        <input readOnly type="radio" name="tt-join" checked="{{ thoaThuanKhong }}" data-val="khong" onClick="{{ onThoaThuanJoin }}" style="width:16px;height:16px;accent-color:#d92d20;cursor:pointer">Không tham gia
-                      </label>
-                    </div>
-                    <sc-if value="{{ thoaThuanCo }}">
-                      <div style="margin-top:16px">
-                        <div style="font-size:13px;font-weight:600;color:#d92d20;margin-bottom:10px">Loại thoả thuận</div>
-                        <div style="display:flex;flex-direction:column;gap:11px">
-                          <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:#d92d20;cursor:pointer;width:fit-content">
-                            <input readOnly type="radio" name="tt-type" checked="{{ thoaThuanUyThac }}" data-val="uythac" onClick="{{ onThoaThuanType }}" style="width:16px;height:16px;accent-color:#d92d20;cursor:pointer">Thoả thuận uỷ thác
-                          </label>
-                          <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:#d92d20;cursor:pointer;width:fit-content">
-                            <input readOnly type="radio" name="tt-type" checked="{{ thoaThuanUyQuyen }}" data-val="uyquyen" onClick="{{ onThoaThuanType }}" style="width:16px;height:16px;accent-color:#d92d20;cursor:pointer">Thoả thuận uỷ quyền
-                          </label>
-                          <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:#d92d20;cursor:pointer;width:fit-content">
-                            <input readOnly type="radio" name="tt-type" checked="{{ thoaThuanKhac }}" data-val="khac" onClick="{{ onThoaThuanType }}" style="width:16px;height:16px;accent-color:#d92d20;cursor:pointer">Thoả thuận khác
-                          </label>
-                          <sc-if value="{{ thoaThuanKhac }}">
-                            <label style="display:flex;align-items:center;gap:8px;margin-left:24px;width:fit-content;padding:10px 16px;border:1px dashed #d92d20;border-radius:8px;font-size:13px;color:#d92d20;cursor:pointer">
-                              <input type="file" onChange="{{ onThoaThuanFile }}" style="display:none">
-                              <span style="font-family:'Material Symbols Outlined';font-size:17px">upload_file</span>{{ thoaThuanFileLabel }}
-                            </label>
-                          </sc-if>
-                        </div>
-
-                      </div>
-                    </sc-if>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <div style="border-top:1px dashed #f0c4c0;margin:20px 0 14px"></div>
-            <div style="font-size:14px;font-weight:600;color:#d92d20;margin-bottom:12px">3. Giấy khác</div>
+            <div style="font-size:14px;font-weight:600;color:#d92d20;margin-bottom:12px">2. Giấy khác</div>
             <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
               <label style="display:flex;align-items:center;gap:8px;max-width:260px;padding:10px 16px;border:1px dashed #d92d20;border-radius:8px;font-size:13px;color:#d92d20;cursor:pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">
                 <input type="file" onChange="{{ onOtherFile }}" style="display:none">
@@ -911,149 +866,6 @@ button{font-family:inherit;cursor:pointer}
             </div>
             <input value="{{ repInfo.diaChiHienTai }}" data-key="diaChiHienTai" onChange="{{ onRep }}" placeholder="Nhập số nhà, tên đường, tên tòa nhà, v.v..." style="width:100%;padding:11px 14px;border:1px solid #d6dade;border-radius:8px;font-size:14px;color:#3a4045;outline:none" style-focus="border-color:#26B24C">
           </div>
-
-          <div style="background:#fff;border:1px solid #f3cfcc;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(20,30,40,.06);margin-bottom:20px">
-            <div style="font-size:15px;font-weight:600;color:#d92d20;margin-bottom:14px">Thu thập thông tin nhận dạng người mua, người bán hàng hoá</div>
-            <div style="display:flex;flex-direction:column;gap:12px">
-              <sc-for list="{{ thuThapOpts }}" as="o" hint-placeholder-count="3">
-                <label style="display:flex;align-items:center;gap:9px;font-size:14px;color:#d92d20;cursor:pointer;width:fit-content">
-                  <input readOnly type="radio" name="thuthap" checked="{{ o.checked }}" data-key="{{ o.v }}" onClick="{{ onThuThap }}" style="width:16px;height:16px;accent-color:#d92d20;cursor:pointer">
-                  <span>{{ o.t }}</span>
-                </label>
-              </sc-for>
-            </div>
-          </div>
-
-          <sc-if value="{{ showUyThacIdent }}">
-            <div style="background:#fff;border:1px solid #f3cfcc;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(20,30,40,.06);margin-bottom:24px">
-              <div style="font-size:15px;font-weight:600;color:#d92d20;margin-bottom:12px;line-height:1.5">Thông tin nhận dạng của Bên ủy thác, Bên nhận ủy thác, Người thụ hưởng, các Bên có liên quan (nếu có), cá nhân có quyền kiểm soát cuối cùng đối với ủy thác của Khách hàng là:</div>
-              <div style="display:flex;gap:28px;margin-bottom:18px">
-                <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:#d92d20;cursor:pointer">
-                  <input readOnly type="radio" name="ben-loai" checked="{{ benUyThacCaNhan }}" data-val="canhan" onClick="{{ onBenUyThacLoai }}" style="width:16px;height:16px;accent-color:#d92d20;cursor:pointer">Cá nhân
-                </label>
-                <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:#d92d20;cursor:pointer">
-                  <input readOnly type="radio" name="ben-loai" checked="{{ benUyThacToChuc }}" data-val="tochuc" onClick="{{ onBenUyThacLoai }}" style="width:16px;height:16px;accent-color:#d92d20;cursor:pointer">Tổ chức
-                </label>
-              </div>
-              <sc-if value="{{ benUyThacCaNhan }}">
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 20px">
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">Họ và tên</label>
-                    <input value="{{ cnUyThac.hoTen }}" data-key="hoTen" onChange="{{ onCnUyThac }}" placeholder="Nhập họ và tên" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">Mã số thuế</label>
-                    <input value="{{ cnUyThac.maSoThue }}" data-key="maSoThue" onChange="{{ onCnUyThac }}" placeholder="Nhập mã số thuế" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">Ngày, tháng, năm sinh</label>
-                    <input value="{{ cnUyThac.ngaySinh }}" data-key="ngaySinh" onChange="{{ onCnUyThac }}" placeholder="DD/MM/YYYY" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">Quốc tịch</label>
-                    <input value="{{ cnUyThac.quocTich }}" data-key="quocTich" onChange="{{ onCnUyThac }}" placeholder="Nhập quốc tịch" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div style="grid-column:1 / -1">
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">Số CMND/CCCD/Số định danh cá nhân/Hộ chiếu/Thị thực nhập cảnh</label>
-                    <input value="{{ cnUyThac.soCMND }}" data-key="soCMND" onChange="{{ onCnUyThac }}" placeholder="Nhập số giấy tờ định danh" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">Nghề nghiệp/Chức vụ</label>
-                    <input value="{{ cnUyThac.ngheNghiep }}" data-key="ngheNghiep" onChange="{{ onCnUyThac }}" placeholder="Nhập nghề nghiệp/chức vụ" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">Số điện thoại</label>
-                    <input value="{{ cnUyThac.dienThoai }}" data-key="dienThoai" onChange="{{ onCnUyThac }}" inputmode="numeric" placeholder="Nhập số điện thoại" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div style="grid-column:1 / -1">
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">Nơi ở hiện tại (đối với người Việt Nam)/Nơi đăng ký cư trú ở Việt Nam (đối với người nước ngoài)</label>
-                    <input value="{{ cnUyThac.noiO }}" data-key="noiO" onChange="{{ onCnUyThac }}" placeholder="Nhập nơi ở hiện tại / nơi đăng ký cư trú" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div style="grid-column:1 / -1">
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">Địa chỉ thường trú (đối với người Việt Nam)/Nơi đăng ký cư trú ở nước ngoài (đối với người nước ngoài)</label>
-                    <input value="{{ cnUyThac.thuongTru }}" data-key="thuongTru" onChange="{{ onCnUyThac }}" placeholder="Nhập địa chỉ thường trú / nơi đăng ký cư trú ở nước ngoài" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                </div>
-              </sc-if>
-              <sc-if value="{{ benUyThacToChuc }}">
-                <div style="font-size:13.5px;font-weight:700;color:#d92d20;margin:4px 0 14px">1.1. Thông tin chung</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;margin-bottom:22px">
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">a. Tên giao dịch bằng tiếng Việt</label>
-                    <input value="{{ orgUyThac.tenGiaoDich }}" data-key="tenGiaoDich" onChange="{{ onOrgUyThac }}" placeholder="Nhập tên giao dịch" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">b. Tên viết tắt</label>
-                    <input value="{{ orgUyThac.tenVietTat }}" data-key="tenVietTat" onChange="{{ onOrgUyThac }}" placeholder="Nhập tên viết tắt" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div style="grid-column:1 / -1">
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">c. Địa chỉ trụ sở chính</label>
-                    <input value="{{ orgUyThac.diaChiTruSo }}" data-key="diaChiTruSo" onChange="{{ onOrgUyThac }}" placeholder="Nhập địa chỉ trụ sở chính" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div style="grid-column:1 / -1">
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">d. Số giấy phép thành lập/Mã số thuế/Mã số doanh nghiệp</label>
-                    <input value="{{ orgUyThac.soGiayPhep }}" data-key="soGiayPhep" onChange="{{ onOrgUyThac }}" placeholder="Nhập số giấy phép / MST / MSDN" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">e. Số điện thoại</label>
-                    <input value="{{ orgUyThac.dienThoai }}" data-key="dienThoai" onChange="{{ onOrgUyThac }}" inputmode="numeric" placeholder="Nhập số điện thoại" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">f. Email</label>
-                    <input value="{{ orgUyThac.email }}" data-key="email" onChange="{{ onOrgUyThac }}" placeholder="Nhập email" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div style="grid-column:1 / -1">
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">g. Website/App tích hợp Dịch vụ trung gian thanh toán (nếu có)</label>
-                    <input value="{{ orgUyThac.website }}" data-key="website" onChange="{{ onOrgUyThac }}" placeholder="Nhập website/app" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div style="grid-column:1 / -1">
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">h. Mục đích sử dụng Dịch vụ trung gian thanh toán của Khách hàng</label>
-                    <textarea value="{{ orgUyThac.mucDich }}" data-key="mucDich" onChange="{{ onOrgUyThac }}" rows="2" placeholder="Mô tả mục đích sử dụng" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none;resize:vertical;font-family:inherit" style-focus="border-color:#d92d20"></textarea>
-                  </div>
-                  <div style="grid-column:1 / -1">
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">i. Ngành nghề, lĩnh vực kinh doanh</label>
-                    <input value="{{ orgUyThac.nganhNghe }}" data-key="nganhNghe" onChange="{{ onOrgUyThac }}" placeholder="Nhập ngành nghề, lĩnh vực kinh doanh" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                </div>
-
-                <div style="font-size:13.5px;font-weight:700;color:#d92d20;margin:4px 0 14px;border-top:1px dashed #f0c4c0;padding-top:18px">1.2. Thông tin về người đại diện theo pháp luật</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 20px">
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">a. Họ và tên</label>
-                    <input value="{{ orgUyThac.repHoTen }}" data-key="repHoTen" onChange="{{ onOrgUyThac }}" placeholder="Nhập họ và tên" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">b. Ngày, tháng, năm sinh</label>
-                    <input value="{{ orgUyThac.repNgaySinh }}" data-key="repNgaySinh" onChange="{{ onOrgUyThac }}" placeholder="DD/MM/YYYY" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div style="grid-column:1 / -1">
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">c. Số CMND/CCCD/Số định danh cá nhân/Hộ chiếu/Thị thực nhập cảnh</label>
-                    <input value="{{ orgUyThac.repCMND }}" data-key="repCMND" onChange="{{ onOrgUyThac }}" placeholder="Nhập số giấy tờ định danh" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">d. Quốc tịch</label>
-                    <input value="{{ orgUyThac.repQuocTich }}" data-key="repQuocTich" onChange="{{ onOrgUyThac }}" placeholder="Nhập quốc tịch" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">e. Nghề nghiệp/Chức vụ</label>
-                    <input value="{{ orgUyThac.repNgheNghiep }}" data-key="repNgheNghiep" onChange="{{ onOrgUyThac }}" placeholder="Nhập nghề nghiệp/chức vụ" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div>
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">f. Số điện thoại</label>
-                    <input value="{{ orgUyThac.repDienThoai }}" data-key="repDienThoai" onChange="{{ onOrgUyThac }}" inputmode="numeric" placeholder="Nhập số điện thoại" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div style="grid-column:1 / -1">
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">g. Nơi ở hiện tại (đối với người Việt Nam)/Nơi đăng ký cư trú ở Việt Nam (đối với người nước ngoài)</label>
-                    <input value="{{ orgUyThac.repNoiO }}" data-key="repNoiO" onChange="{{ onOrgUyThac }}" placeholder="Nhập nơi ở hiện tại / nơi đăng ký cư trú" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                  <div style="grid-column:1 / -1">
-                    <label style="display:block;font-size:12.5px;color:#b0524d;margin-bottom:6px">h. Địa chỉ thường trú (đối với người Việt Nam)/Nơi đăng ký cư trú ở nước ngoài (đối với người nước ngoài)</label>
-                    <input value="{{ orgUyThac.repThuongTru }}" data-key="repThuongTru" onChange="{{ onOrgUyThac }}" placeholder="Nhập địa chỉ thường trú / nơi đăng ký cư trú ở nước ngoài" style="width:100%;padding:10px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
-                  </div>
-                </div>
-              </sc-if>
-            </div>
-          </sc-if>
 
           <sc-if value="{{ stepErrorMsg }}">
             <div style="display:flex;align-items:flex-start;gap:9px;background:#fdeceb;border:1px solid #f3cfcc;border-radius:9px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#d92d20;font-weight:500;line-height:1.5"><span style="font-family:'Material Symbols Outlined';font-size:19px;flex-shrink:0">error</span><span>{{ stepErrorMsg }}</span></div>
@@ -1230,7 +1042,6 @@ class Component extends DCLogic {
     relDoc: {
       giayPhepCon: false, giayPhepConFile: '',
       uyQuyenJoin: '', uyQuyenFile: '',
-      thoaThuan: false, thoaThuanJoin: '', thoaThuanType: '', thoaThuanFile: '',
       benUyThacLoai: '', benNhanLoai: '',
     },
     bizInfo: { tenDayDu:'Công ty TNHH ABC', soDKKD:'012345678', diaChi:'Việt Nam', ngayDKKD:'27/01/2022', nguoiDaiDien:'Nguyễn Văn A' },
@@ -1969,22 +1780,12 @@ class Component extends DCLogic {
       // giấy tờ liên quan
       relGiayPhepCon: st.relDoc.giayPhepCon,
       relGiayPhepConLabel: st.relDoc.giayPhepConFile || 'Tải file giấy phép con',
-      relThoaThuan: st.relDoc.thoaThuan,
-      thoaThuanJoin: st.relDoc.thoaThuanJoin,
-      thoaThuanCo: st.relDoc.thoaThuanJoin === 'co',
-      thoaThuanKhong: st.relDoc.thoaThuanJoin === 'khong',
-      thoaThuanType: st.relDoc.thoaThuanType,
-      thoaThuanUyThac: st.relDoc.thoaThuanType === 'uythac',
-      thoaThuanUyQuyen: st.relDoc.thoaThuanType === 'uyquyen',
-      thoaThuanKhac: st.relDoc.thoaThuanType === 'khac',
-      thoaThuanHasType: !!st.relDoc.thoaThuanType,
-      thoaThuanFileLabel: st.relDoc.thoaThuanFile || 'Tải file thoả thuận',
       benUyThacLoai: st.relDoc.benUyThacLoai,
       benUyThacCaNhan: st.relDoc.benUyThacLoai === 'canhan',
       benUyThacToChuc: st.relDoc.benUyThacLoai === 'tochuc',
       benLoaiLabel: st.relDoc.benUyThacLoai === 'canhan' ? 'Cá nhân' : (st.relDoc.benUyThacLoai === 'tochuc' ? 'Tổ chức' : ''),
-      showAmlStep4: st.relDoc.thoaThuanJoin === 'co' && !!st.relDoc.thoaThuanType && !!st.relDoc.benUyThacLoai,
-      showUyThacIdent: st.relDoc.thoaThuanJoin === 'co' && !!st.relDoc.thoaThuanType,
+      showAmlStep4: !!st.relDoc.benUyThacLoai,
+      showUyThacIdent: true,
       benNhanLoai: st.relDoc.benNhanLoai,
       benNhanCaNhan: st.relDoc.benNhanLoai === 'canhan',
       benNhanToChuc: st.relDoc.benNhanLoai === 'tochuc',
@@ -1995,10 +1796,6 @@ class Component extends DCLogic {
       relUyQuyenLabel: st.relDoc.uyQuyenFile || 'Tải lên giấy uỷ quyền',
       onUyQuyenJoin: (e) => { const v=e.currentTarget.dataset.val; this.setState(s=>({ stepError:'', relDoc:{...s.relDoc, uyQuyenJoin: s.relDoc.uyQuyenJoin===v ? '' : v} })); },
       onRelUyQuyenFile: (e) => { const f=e.target.files&&e.target.files[0]; if(!f)return; this.setState(s=>({ stepError:'', relDoc:{...s.relDoc, uyQuyenFile:f.name} })); },
-      onRelThoaThuan: (e) => { const v=e.target.checked; this.setState(s=>({ relDoc:{...s.relDoc, thoaThuan:v} })); },
-      onThoaThuanJoin: (e) => { const v=e.currentTarget.dataset.val; this.setState(s=>({ stepError:'', relDoc:{...s.relDoc, thoaThuanJoin: s.relDoc.thoaThuanJoin===v ? '' : v} })); },
-      onThoaThuanType: (e) => { const v=e.currentTarget.dataset.val; this.setState(s=>({ stepError:'', relDoc:{...s.relDoc, thoaThuanType: s.relDoc.thoaThuanType===v ? '' : v} })); },
-      onThoaThuanFile: (e) => { const f=e.target.files&&e.target.files[0]; if(!f)return; this.setState(s=>({ stepError:'', relDoc:{...s.relDoc, thoaThuanFile:f.name} })); },
       onBenUyThacLoai: (e) => { const v=e.currentTarget.dataset.val; this.setState(s=>({ relDoc:{...s.relDoc, benUyThacLoai: s.relDoc.benUyThacLoai===v ? '' : v} })); },
       onBenNhanLoai: (e) => { const v=e.currentTarget.dataset.val; this.setState(s=>({ relDoc:{...s.relDoc, benNhanLoai: s.relDoc.benNhanLoai===v ? '' : v} })); },
       orgUyThac: st.orgUyThac,
@@ -2097,12 +1894,9 @@ class Component extends DCLogic {
             if (!s.docs.dkkdFront || !s.docs.dkkdBack) probs.push('upload đầy đủ ảnh Giấy ĐKKD/Quyết định thành lập');
           }
           if (licenseReqs.some(r => !licStatusMap[r.id])) probs.push('chọn tình trạng Giấy phép con');
-          if (!st.relDoc.thoaThuanJoin) probs.push('chọn Thoả thuận pháp lý');
-          if (st.relDoc.thoaThuanJoin==='co' && !st.relDoc.thoaThuanType) probs.push('chọn Loại thoả thuận');
           if (probs.length) err = 'Vui lòng ' + probs.join(', ') + ' trước khi tiếp tục.';
         } else if (os === 3) {
           const probs = [];
-          if (!s.thuThap) probs.push('chọn Thu thập thông tin nhận dạng người mua, người bán hàng hoá');
           repFields.forEach(f => { if(!(st.repInfo[f.key]||'').toString().trim()) probs.push('nhập ' + f.label); });
           if (!st.repInfo.tinh || !st.repInfo.quan || !st.repInfo.phuong) probs.push('chọn đầy đủ Nơi ở hiện tại (Tỉnh/Quận/Phường)');
           if (probs.length) err = 'Vui lòng ' + probs.join(', ') + ' trước khi tiếp tục.';
