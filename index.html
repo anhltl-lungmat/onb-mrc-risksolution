@@ -242,12 +242,11 @@ button{font-family:inherit;cursor:pointer}
                 </label>
               </sc-for>
             </div>
-            <div style="border:1px dashed #c4c9ce;border-radius:10px;background:#f7f8f9;padding:13px 16px 16px">
+            <div>
               <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
-                
-                <span style="font-size:14px;font-weight:600;color:#9aa0a8;text-decoration:line-through">Lĩnh vực kinh doanh</span>
+                <span style="font-size:14px;font-weight:600;color:#3a4045">Lĩnh vực kinh doanh</span>
               </div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px;opacity:.6">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px">
               <select value="{{ onboard.nganh }}" onChange="{{ onNganh }}" style="{{ selectStyle }}">
                 <option value="">Chọn lĩnh vực</option>
                 <option value="banle">Bán lẻ / Thương mại điện tử</option>
@@ -262,8 +261,7 @@ button{font-family:inherit;cursor:pointer}
               </select>
             </div>
             </div>
-            <div style="display:flex;align-items:center;gap:7px;margin:14px 0 8px;font-size:12.5px;font-weight:700;color:#d92d20"><span style="font-family:'Material Symbols Outlined';font-size:18px">south</span></div>
-            <div style="display:flex;align-items:center;gap:9px;margin:0 0 6px"><span style="font-size:14px;font-weight:600;color:#d92d20">Ngành nghề kinh doanh đăng ký với Baokim</span></div>
+            <div style="display:flex;align-items:center;gap:9px;margin:22px 0 6px"><span style="font-size:14px;font-weight:600;color:#d92d20">Ngành nghề kinh doanh đăng ký với Baokim</span></div>
             <div style="font-size:12px;color:#d92d20;margin-bottom:10px;line-height:1.5">{{ nganhIntro }}</div>
             <div style="position:relative;max-width:560px">
               <span style="position:absolute;left:13px;top:50%;transform:translateY(-50%);font-family:'Material Symbols Outlined';font-size:19px;color:#d92d20;pointer-events:none">search</span>
@@ -387,17 +385,17 @@ button{font-family:inherit;cursor:pointer}
                     <button data-idx="{{ w.idx }}" onClick="{{ onRemoveWeb }}" style="{{ w.removeStyle }}">Xóa</button>
                     <button onClick="{{ onAddWeb }}" style="{{ w.addStyle }}"><span style="font-family:'Material Symbols Outlined';font-size:16px">grid_view</span>Thêm</button>
                   </div>
-                  <div style="border:1px dashed #c4c9ce;border-radius:10px;background:#f7f8f9;padding:13px 16px 16px;margin-top:16px">
+                  <div style="margin-top:16px">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
                       <div style="display:flex;align-items:center;gap:9px">
                         
-                        <span style="font-size:13px;font-weight:600;color:#9aa0a8;text-decoration:line-through">Ngành nghề kinh doanh</span>
+                        <span style="font-size:13px;font-weight:600;color:#3a4045">Ngành nghề kinh doanh</span>
                       </div>
-                      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#9aa0a8;cursor:pointer">
-                        <input type="checkbox" checked="{{ w.laChinh }}" data-idx="{{ w.idx }}" data-field="laChinh" onChange="{{ onWebField }}" style="width:16px;height:16px;accent-color:#9aa0a8;cursor:pointer">Là ngành nghề chính
+                      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#3a4045;cursor:pointer">
+                        <input type="checkbox" checked="{{ w.laChinh }}" data-idx="{{ w.idx }}" data-field="laChinh" onChange="{{ onWebField }}" style="width:16px;height:16px;accent-color:#26B24C;cursor:pointer">Là ngành nghề chính
                       </label>
                     </div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;opacity:.6">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
                       <select value="{{ w.nhom }}" data-idx="{{ w.idx }}" data-field="nhom" onChange="{{ onWebField }}" style="{{ smallSelect }}">
                         <option value="">Chọn nhóm ngành</option>
                         <sc-for list="{{ nhomOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.t }}</option></sc-for>
@@ -408,9 +406,6 @@ button{font-family:inherit;cursor:pointer}
                       </select>
                     </div>
                   </div>
-                  <div style="display:flex;align-items:center;gap:7px;margin:14px 0 8px;font-size:12.5px;font-weight:700;color:#d92d20"><span style="font-family:'Material Symbols Outlined';font-size:18px">south</span></div>
-                  <div style="display:flex;align-items:center;gap:9px;margin:0 0 10px"><span style="font-size:13px;font-weight:600;color:#d92d20">Ngành nghề kinh doanh</span></div>
-                  <dc-import name="NganhPicker" mode="{{ nganhMode }}" value="{{ w.nganhCap4Value }}" on-change="{{ w.onNganhChange }}" hint-size="100%,200px"></dc-import>
                   <div style="font-size:13px;font-weight:600;color:#d92d20;margin:18px 0 8px">Trạng thái đăng ký về TMĐT theo quy định pháp luật</div>
                   <div style="display:flex;flex-direction:column;gap:10px">
                     <label style="display:flex;align-items:center;gap:9px;font-size:13px;color:#d92d20;cursor:pointer;width:fit-content">
@@ -461,17 +456,17 @@ button{font-family:inherit;cursor:pointer}
                     <button data-idx="{{ p.idx }}" onClick="{{ onRemovePlat }}" style="{{ p.removeStyle }}">Xóa</button>
                     <button onClick="{{ onAddPlat }}" style="{{ p.addStyle }}"><span style="font-family:'Material Symbols Outlined';font-size:16px">grid_view</span>Thêm</button>
                   </div>
-                  <div style="border:1px dashed #c4c9ce;border-radius:10px;background:#f7f8f9;padding:13px 16px 16px;margin-top:16px">
+                  <div style="margin-top:16px">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
                       <div style="display:flex;align-items:center;gap:9px">
                         
-                        <span style="font-size:13px;font-weight:600;color:#9aa0a8;text-decoration:line-through">Ngành nghề kinh doanh</span>
+                        <span style="font-size:13px;font-weight:600;color:#3a4045">Ngành nghề kinh doanh</span>
                       </div>
-                      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#9aa0a8;cursor:pointer">
-                        <input type="checkbox" checked="{{ p.laChinh }}" data-idx="{{ p.idx }}" data-field="laChinh" onChange="{{ onPlatField }}" style="width:16px;height:16px;accent-color:#9aa0a8;cursor:pointer">Là ngành nghề chính
+                      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#3a4045;cursor:pointer">
+                        <input type="checkbox" checked="{{ p.laChinh }}" data-idx="{{ p.idx }}" data-field="laChinh" onChange="{{ onPlatField }}" style="width:16px;height:16px;accent-color:#26B24C;cursor:pointer">Là ngành nghề chính
                       </label>
                     </div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;opacity:.6">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
                       <select value="{{ p.nhom }}" data-idx="{{ p.idx }}" data-field="nhom" onChange="{{ onPlatField }}" style="{{ smallSelect }}">
                         <option value="">Chọn nhóm ngành</option>
                         <sc-for list="{{ nhomOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.t }}</option></sc-for>
@@ -482,9 +477,6 @@ button{font-family:inherit;cursor:pointer}
                       </select>
                     </div>
                   </div>
-                  <div style="display:flex;align-items:center;gap:7px;margin:14px 0 8px;font-size:12.5px;font-weight:700;color:#d92d20"><span style="font-family:'Material Symbols Outlined';font-size:18px">south</span></div>
-                  <div style="display:flex;align-items:center;gap:9px;margin:0 0 10px"><span style="font-size:13px;font-weight:600;color:#d92d20">Ngành nghề kinh doanh</span></div>
-                  <dc-import name="NganhPicker" mode="{{ nganhMode }}" value="{{ p.nganhCap4Value }}" on-change="{{ p.onNganhChange }}" hint-size="100%,200px"></dc-import>
                   <div style="font-size:13px;font-weight:600;color:#d92d20;margin:18px 0 8px">Trạng thái đăng ký về TMĐT theo quy định pháp luật</div>
                   <div style="display:flex;flex-direction:column;gap:10px">
                     <label style="display:flex;align-items:center;gap:9px;font-size:13px;color:#d92d20;cursor:pointer;width:fit-content">
@@ -547,17 +539,17 @@ button{font-family:inherit;cursor:pointer}
                       <input value="{{ s.sdt }}" data-idx="{{ s.idx }}" data-field="sdt" onChange="{{ onStoreField }}" inputmode="numeric" placeholder="Số điện thoại" style="{{ fullInput }}" style-focus="border-color:#26B24C">
                     </div>
                   </div>
-                  <div style="border:1px dashed #c4c9ce;border-radius:10px;background:#f7f8f9;padding:13px 16px 16px;margin-top:18px">
+                  <div style="margin-top:18px">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
                       <div style="display:flex;align-items:center;gap:9px">
                         
-                        <span style="font-size:13px;font-weight:600;color:#9aa0a8;text-decoration:line-through">Ngành nghề kinh doanh</span>
+                        <span style="font-size:13px;font-weight:600;color:#3a4045">Ngành nghề kinh doanh</span>
                       </div>
-                      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#9aa0a8;cursor:pointer">
-                        <input type="checkbox" checked="{{ s.laChinh }}" data-idx="{{ s.idx }}" data-field="laChinh" onChange="{{ onStoreField }}" style="width:16px;height:16px;accent-color:#9aa0a8;cursor:pointer">Là ngành nghề chính
+                      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#3a4045;cursor:pointer">
+                        <input type="checkbox" checked="{{ s.laChinh }}" data-idx="{{ s.idx }}" data-field="laChinh" onChange="{{ onStoreField }}" style="width:16px;height:16px;accent-color:#26B24C;cursor:pointer">Là ngành nghề chính
                       </label>
                     </div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;opacity:.6">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
                       <select value="{{ s.nhom }}" data-idx="{{ s.idx }}" data-field="nhom" onChange="{{ onStoreField }}" style="{{ smallSelect }}">
                         <option value="">Chọn nhóm ngành</option>
                         <sc-for list="{{ nhomOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.t }}</option></sc-for>
@@ -568,9 +560,6 @@ button{font-family:inherit;cursor:pointer}
                       </select>
                     </div>
                   </div>
-                  <div style="display:flex;align-items:center;gap:7px;margin:14px 0 8px;font-size:12.5px;font-weight:700;color:#d92d20"><span style="font-family:'Material Symbols Outlined';font-size:18px">south</span></div>
-                  <div style="display:flex;align-items:center;gap:9px;margin:0 0 10px"><span style="font-size:13px;font-weight:600;color:#d92d20">Ngành nghề kinh doanh</span></div>
-                  <dc-import name="NganhPicker" mode="{{ nganhMode }}" value="{{ s.nganhCap4Value }}" on-change="{{ s.onNganhChange }}" hint-size="100%,200px"></dc-import>
                   <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:16px">
                     <button data-idx="{{ s.idx }}" onClick="{{ onRemoveStore }}" style="{{ s.removeStyle }}">Xóa</button>
                     <button onClick="{{ onAddStore }}" style="{{ s.addStyle }}"><span style="font-family:'Material Symbols Outlined';font-size:16px">grid_view</span>Thêm</button>
@@ -593,17 +582,17 @@ button{font-family:inherit;cursor:pointer}
                     <sc-for list="{{ swOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.t }}</option></sc-for>
                   </select>
                 </div>
-                <div style="border:1px dashed #c4c9ce;border-radius:10px;background:#f7f8f9;padding:13px 16px 16px;margin-top:18px;max-width:880px">
+                <div style="margin-top:18px;max-width:880px">
                   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
                     <div style="display:flex;align-items:center;gap:9px">
                       
-                      <span style="font-size:13px;font-weight:600;color:#9aa0a8;text-decoration:line-through">Ngành nghề kinh doanh</span>
+                      <span style="font-size:13px;font-weight:600;color:#3a4045">Ngành nghề kinh doanh</span>
                     </div>
-                    <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#9aa0a8;cursor:pointer">
-                      <input type="checkbox" checked="{{ softwareCfg.laChinh }}" data-field="laChinh" onChange="{{ onSwField }}" style="width:16px;height:16px;accent-color:#9aa0a8;cursor:pointer">Là ngành nghề chính
+                    <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#3a4045;cursor:pointer">
+                      <input type="checkbox" checked="{{ softwareCfg.laChinh }}" data-field="laChinh" onChange="{{ onSwField }}" style="width:16px;height:16px;accent-color:#26B24C;cursor:pointer">Là ngành nghề chính
                     </label>
                   </div>
-                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;opacity:.6">
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
                     <select value="{{ softwareCfg.nhom }}" data-field="nhom" onChange="{{ onSwField }}" style="{{ smallSelect }}">
                       <option value="">Chọn nhóm ngành</option>
                       <sc-for list="{{ nhomOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.t }}</option></sc-for>
@@ -614,9 +603,6 @@ button{font-family:inherit;cursor:pointer}
                     </select>
                   </div>
                 </div>
-                <div style="display:flex;align-items:center;gap:7px;margin:14px 0 8px;font-size:12.5px;font-weight:700;color:#d92d20"><span style="font-family:'Material Symbols Outlined';font-size:18px">south</span></div>
-                <div style="display:flex;align-items:center;gap:9px;margin:0 0 10px"><span style="font-size:13px;font-weight:600;color:#d92d20">Ngành nghề kinh doanh</span></div>
-                <dc-import name="NganhPicker" mode="{{ nganhMode }}" value="{{ swNganhValue }}" on-change="{{ onSwNganhChange }}" hint-size="100%,200px"></dc-import>
               </div>
             </div>
           </div>
@@ -752,24 +738,24 @@ button{font-family:inherit;cursor:pointer}
             <p style="font-size:12.5px;color:#9aa0a8;margin:0;line-height:1.5">Các ngành nghề bạn chọn ở Bước 1 không yêu cầu giấy phép con. Nếu có giấy phép con khác, vui lòng bổ sung tại mục Giấy khác.</p>
             </sc-if>
 
-            <div style="border-top:1px dashed #f0c4c0;margin:20px 0 14px"></div>
-            <div style="font-size:14px;font-weight:600;color:#d92d20;margin-bottom:12px">2. Giấy khác</div>
+            <div style="border-top:1px dashed #e3e6ea;margin:20px 0 14px"></div>
+            <div style="font-size:14px;font-weight:600;color:#3a4045;margin-bottom:12px">2. Giấy tờ khác</div>
             <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-              <label style="display:flex;align-items:center;gap:8px;max-width:260px;padding:10px 16px;border:1px dashed #d92d20;border-radius:8px;font-size:13px;color:#d92d20;cursor:pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">
+              <label style="display:flex;align-items:center;gap:8px;max-width:260px;padding:10px 16px;border:1px dashed #9aa0a8;border-radius:8px;font-size:13px;color:#3a4045;cursor:pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">
                 <input type="file" onChange="{{ onOtherFile }}" style="display:none">
                 <span style="font-family:'Material Symbols Outlined';font-size:17px">upload_file</span><span style="overflow:hidden;text-overflow:ellipsis">{{ otherDocFileLabel }}</span>
               </label>
               <div style="display:flex;flex-direction:column;gap:4px">
                 <span style="font-size:11px;color:#9aa0a8">Ngày hết hạn giấy tờ (nếu có)</span>
-                <input type="date" value="{{ otherDocExpiry }}" onChange="{{ onOtherExpiry }}" style="width:170px;padding:9px 13px;border:1px solid #e3c9c6;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#d92d20">
+                <input type="date" value="{{ otherDocExpiry }}" onChange="{{ onOtherExpiry }}" style="width:170px;padding:9px 13px;border:1px solid #d6dade;border-radius:8px;font-size:13px;color:#3a4045;background:#fff;outline:none" style-focus="border-color:#26B24C">
               </div>
-              <button onClick="{{ onAddOther }}" style="display:flex;align-items:center;gap:6px;background:#d92d20;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:500;align-self:flex-end" style-hover="background:#c0271b"><span style="font-family:'Material Symbols Outlined';font-size:16px">add</span>Thêm</button>
+              <button onClick="{{ onAddOther }}" style="display:flex;align-items:center;gap:6px;background:#26B24C;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:500;align-self:flex-end" style-hover="background:#1f9a41"><span style="font-family:'Material Symbols Outlined';font-size:16px">add</span>Thêm</button>
             </div>
             <sc-if value="{{ hasOtherDocs }}" hint-placeholder-val="{{ true }}">
               <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px">
                 <sc-for list="{{ otherDocs }}" as="o" hint-placeholder-count="1">
-                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fdf6f5;border:1px solid #f3cfcc;border-radius:8px;padding:9px 14px;font-size:13px;color:#3a4045;max-width:460px">
-                    <span style="display:flex;align-items:center;gap:10px"><span style="font-family:'Material Symbols Outlined';font-size:17px;color:#d92d20">description</span>{{ o.name }}<sc-if value="{{ o.expiry }}"><span style="color:#9aa0a8;font-size:12px">HSD: {{ o.expiry }}</span></sc-if></span>
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f6f7f9;border:1px solid #e3e6ea;border-radius:8px;padding:9px 14px;font-size:13px;color:#3a4045;max-width:460px">
+                    <span style="display:flex;align-items:center;gap:10px"><span style="font-family:'Material Symbols Outlined';font-size:17px;color:#26B24C">description</span>{{ o.name }}<sc-if value="{{ o.expiry }}"><span style="color:#9aa0a8;font-size:12px">HSD: {{ o.expiry }}</span></sc-if></span>
                     <span data-idx="{{ o.idx }}" onClick="{{ onRemoveOther }}" style="font-family:'Material Symbols Outlined';font-size:17px;color:#9aa0a8;cursor:pointer">close</span>
                   </div>
                 </sc-for>
@@ -1030,7 +1016,7 @@ class Component extends DCLogic {
     resend: 60,
     onboardStep: 0,
     stepError: '',
-    onboard: { loaiHinh: 'doanhnghiep', nganh: '', nganhChinh: '', leadgen: true },
+    onboard: { loaiHinh: 'dn_trongnuoc', nganh: '', nganhChinh: '', leadgen: true },
     services: { thuho: true, atm: true, vnpayqr: true, thequocte: true, bnpl: true, tragop: true },
     docType: 'cccd',
     docs: {},
@@ -1247,7 +1233,7 @@ class Component extends DCLogic {
         labelStyle: { fontSize:'13px', fontWeight: on ? 600 : 500, color: on ? '#2f3438' : '#9aa0a8' },
       };
     });
-    const loaiHinhDefs = [ {key:'canhan',label:'Cá nhân'}, {key:'hokinhdoanh',label:'Hộ kinh doanh'}, {key:'doanhnghiep',label:'Doanh nghiệp/Tổ chức'} ];
+    const loaiHinhDefs = [ {key:'canhan',label:'Cá nhân'}, {key:'hokinhdoanh',label:'Hộ Kinh doanh'}, {key:'dn_nuocngoai',label:'DN nước ngoài'}, {key:'dn_trongnuoc',label:'DN trong nước'} ];
     const loaiHinhOpts = loaiHinhDefs.map(o => {
       const sel = st.onboard.loaiHinh === o.key;
       return {
@@ -1878,10 +1864,10 @@ class Component extends DCLogic {
             if (it.tmdtStatus==='dangthuchien' && !it.tmdtImg) probs.push(label+' (Đang thực hiện) cần upload file minh chứng');
           };
           const reqText = (label, v, field) => { if(!(v||'').toString().trim()) probs.push(label+' chưa nhập '+field); };
-          if (s.chWebApp) s.websites.forEach((w,i)=>{ const L='Website '+(i+1); reqText(L,w.link,'link website'); if(!w.logo) probs.push(L+' chưa upload logo'); if(eff(w.nganhCap4).length===0) probs.push(L+' chưa chọn ngành nghề cấp 4'); checkTmdt(L, w); });
-          if (s.chPayLink) s.platforms.forEach((p,i)=>{ const L='Nền tảng '+(i+1); if(!p.nentang) probs.push(L+' chưa chọn nền tảng'); if(eff(p.nganhCap4).length===0) probs.push(L+' chưa chọn ngành nghề cấp 4'); checkTmdt(L, p); });
-          if (s.chDirect) s.stores.forEach((x,i)=>{ const L='Cửa hàng '+(i+1); reqText(L,x.tenCuaHang,'tên cửa hàng'); reqText(L,x.diaChiCuaHang,'địa chỉ'); reqText(L,x.sdt,'số điện thoại'); if(!x.tinh) probs.push(L+' chưa chọn tỉnh/thành'); if(eff(x.nganhCap4).length===0) probs.push(L+' chưa chọn ngành nghề cấp 4'); });
-          if (s.chSoftware) { if(!s.softwareCfg.phanMem) probs.push('Phần mềm chưa chọn'); if(eff(s.softwareCfg.nganhCap4).length===0) probs.push('Phần mềm chưa chọn ngành nghề cấp 4'); }
+          if (s.chWebApp) s.websites.forEach((w,i)=>{ const L='Website '+(i+1); reqText(L,w.link,'link website'); if(!w.logo) probs.push(L+' chưa upload logo'); checkTmdt(L, w); });
+          if (s.chPayLink) s.platforms.forEach((p,i)=>{ const L='Nền tảng '+(i+1); if(!p.nentang) probs.push(L+' chưa chọn nền tảng'); checkTmdt(L, p); });
+          if (s.chDirect) s.stores.forEach((x,i)=>{ const L='Cửa hàng '+(i+1); reqText(L,x.tenCuaHang,'tên cửa hàng'); reqText(L,x.diaChiCuaHang,'địa chỉ'); reqText(L,x.sdt,'số điện thoại'); if(!x.tinh) probs.push(L+' chưa chọn tỉnh/thành'); });
+          if (s.chSoftware) { if(!s.softwareCfg.phanMem) probs.push('Phần mềm chưa chọn'); }
           if (!s.chWebApp && !s.chPayLink && !s.chDirect && !s.chSoftware) probs.push('chọn ít nhất một kênh tích hợp thanh toán');
           if (s.revenue.some(v => !(v||'').toString().trim())) probs.push('nhập đầy đủ Doanh thu ước tính (Đơn giá, Số lượng, Tổng doanh thu)');
           if (probs.length) err = probs.join('; ') + '.';
@@ -1901,7 +1887,7 @@ class Component extends DCLogic {
           if (!st.repInfo.tinh || !st.repInfo.quan || !st.repInfo.phuong) probs.push('chọn đầy đủ Nơi ở hiện tại (Tỉnh/Quận/Phường)');
           if (probs.length) err = 'Vui lòng ' + probs.join(', ') + ' trước khi tiếp tục.';
         }
-        if (err) { this.setState({ stepError: err }); return; }
+        // Demo: không chặn bước tiếp theo khi thiếu thông tin bắt buộc
         this.setState(s2 => ({ onboardStep: Math.min(5, s2.onboardStep + 1), stepError:'' }));
       },
 
