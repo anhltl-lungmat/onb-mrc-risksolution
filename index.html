@@ -8,6 +8,7 @@
 <body>
 <x-dc>
 <helmet>
+<script src="./nganh-data.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
@@ -273,7 +274,7 @@ button{font-family:inherit;cursor:pointer}
                     <div data-key="{{ o.v }}" onClick="{{ onPickNganh }}" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid #f5eeed" style-hover="background:#fdf3f2">
                       <div style="font-size:14px;color:#2f3438;font-weight:500">{{ o.t }}</div>
                       <div style="font-size:12px;color:#b0524d;margin-top:2px">{{ o.cond }}</div>
-                      <div style="font-size:12px;color:#26B24C;margin-top:1px">{{ o.licHint }}</div>
+                      <sc-if value="{{ o.hasLic }}"><div style="font-size:12px;color:#26B24C;margin-top:1px">{{ o.licHint }}</div></sc-if>
                     </div>
                   </sc-for>
                   <sc-if value="{{ nganhNoResult }}">
@@ -286,9 +287,14 @@ button{font-family:inherit;cursor:pointer}
               </sc-if>
             </div>
             <sc-if value="{{ hasNganhChips }}" hint-placeholder-val="{{ true }}">
-              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+              <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;max-width:560px">
                 <sc-for list="{{ nganhChips }}" as="c" hint-placeholder-count="2">
-                  <span style="display:flex;align-items:center;gap:6px;border:1px solid #d92d20;color:#d92d20;border-radius:16px;padding:5px 12px;font-size:13px">{{ c.label }}<span data-idx="{{ c.idx }}" onClick="{{ onRemoveNganh }}" style="font-family:'Material Symbols Outlined';font-size:15px;cursor:pointer">close</span></span>
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <span style="display:flex;align-items:center;gap:6px;width:fit-content;border:1px solid #d92d20;color:#d92d20;border-radius:16px;padding:5px 12px;font-size:13px">{{ c.label }}<span data-idx="{{ c.idx }}" onClick="{{ onRemoveNganh }}" style="font-family:'Material Symbols Outlined';font-size:15px;cursor:pointer">close</span></span>
+                    <sc-if value="{{ c.isKhac }}">
+                      <input value="{{ c.detail }}" data-idx="{{ c.idx }}" onChange="{{ onNganhDetail }}" placeholder="Chi tiết (không bắt buộc)" style="width:100%;box-sizing:border-box;padding:9px 13px;border:1px solid #d92d20;border-radius:8px;font-size:13px;color:#2f3438;background:#fff;outline:none;font-family:inherit">
+                    </sc-if>
+                  </div>
                 </sc-for>
               </div>
             </sc-if>
@@ -409,7 +415,7 @@ button{font-family:inherit;cursor:pointer}
                   <div style="font-size:13px;font-weight:600;color:#d92d20;margin:18px 0 8px">Trạng thái đăng ký về TMĐT theo quy định pháp luật</div>
                   <div style="display:flex;flex-direction:column;gap:10px">
                     <label style="display:flex;align-items:center;gap:9px;font-size:13px;color:#d92d20;cursor:pointer;width:fit-content">
-                      <input readOnly type="radio" name="tmdt-{{ w.num }}" checked="{{ w.tmdtDaDangKy }}" data-idx="{{ w.idx }}" data-field="tmdtStatus" value="dadangky" onClick="{{ onWebField }}" style="width:16px;height:16px;accent-color:#d92d20;cursor:pointer">Đã đăng ký
+                      <input readOnly type="radio" name="tmdt-{{ w.num }}" checked="{{ w.tmdtDaDangKy }}" data-idx="{{ w.idx }}" data-field="tmdtStatus" value="dadangky" onClick="{{ onWebField }}" style="width:16px;height:16px;accent-color:#d92d20;cursor:pointer">Đã thực hiện
                     </label>
                     <sc-if value="{{ w.tmdtDaDangKy }}">
                       <input value="{{ w.tmdtLink }}" data-idx="{{ w.idx }}" data-field="tmdtLink" onChange="{{ onWebField }}" placeholder="Dán link minh chứng (đuôi .online.gov.vn)" style="width:100%;max-width:560px;margin-left:25px;padding:10px 13px;border:1px solid #d92d20;border-radius:8px;font-size:13px;color:#3a4045;outline:none">
@@ -480,7 +486,7 @@ button{font-family:inherit;cursor:pointer}
                   <div style="font-size:13px;font-weight:600;color:#d92d20;margin:18px 0 8px">Trạng thái đăng ký về TMĐT theo quy định pháp luật</div>
                   <div style="display:flex;flex-direction:column;gap:10px">
                     <label style="display:flex;align-items:center;gap:9px;font-size:13px;color:#d92d20;cursor:pointer;width:fit-content">
-                      <input readOnly type="radio" name="tmdt-plat-{{ p.num }}" checked="{{ p.tmdtDaDangKy }}" data-idx="{{ p.idx }}" data-field="tmdtStatus" value="dadangky" onClick="{{ onPlatField }}" style="width:16px;height:16px;accent-color:#d92d20;cursor:pointer">Đã đăng ký
+                      <input readOnly type="radio" name="tmdt-plat-{{ p.num }}" checked="{{ p.tmdtDaDangKy }}" data-idx="{{ p.idx }}" data-field="tmdtStatus" value="dadangky" onClick="{{ onPlatField }}" style="width:16px;height:16px;accent-color:#d92d20;cursor:pointer">Đã thực hiện
                     </label>
                     <sc-if value="{{ p.tmdtDaDangKy }}">
                       <input value="{{ p.tmdtLink }}" data-idx="{{ p.idx }}" data-field="tmdtLink" onChange="{{ onPlatField }}" placeholder="Dán link minh chứng (đuôi .online.gov.vn)" style="width:100%;max-width:560px;margin-left:25px;padding:10px 13px;border:1px solid #d92d20;border-radius:8px;font-size:13px;color:#3a4045;outline:none">
@@ -726,9 +732,6 @@ button{font-family:inherit;cursor:pointer}
                       <input type="file" data-id="{{ r.id }}" onChange="{{ onLicenseFile }}" style="display:none">
                       <span style="font-family:'Material Symbols Outlined';font-size:17px">upload_file</span>{{ r.fileLabel }}
                     </label>
-                  </sc-if>
-                  <sc-if value="{{ r.isChua }}">
-                    <div style="margin-top:13px;font-size:12.5px;color:#b0524d;line-height:1.5;display:flex;align-items:flex-start;gap:7px"><span style="font-family:'Material Symbols Outlined';font-size:16px;flex-shrink:0">info</span>Bạn cần bổ sung giấy phép này trước khi được kích hoạt dịch vụ cho ngành nghề tương ứng.</div>
                   </sc-if>
                 </div>
               </sc-for>
@@ -1015,6 +1018,7 @@ class Component extends DCLogic {
     otp: ['','','','','',''],
     resend: 60,
     onboardStep: 0,
+    nganhChiTiet: '',
     stepError: '',
     onboard: { loaiHinh: 'dn_trongnuoc', nganh: '', nganhChinh: '', leadgen: true },
     services: { thuho: true, atm: true, vnpayqr: true, thequocte: true, bnpl: true, tragop: true },
@@ -1045,7 +1049,7 @@ class Component extends DCLogic {
     directMethods: { va:false, atm:false, vnpayqr:false, thequocte:false, bnpl:false, tragop:false },
     showMoreMethods: false,
     connectSel: { paylink:false, api:false, embed:false, extension:false, qrbox:false },
-    nganhBaokim: [{ key:'r84', label:'4100 – Xây dựng nhà các loại' }],
+    nganhBaokim: [],
     licenseStatus: {},
     licenseFiles: {},
     nganhQuery: '',
@@ -1570,14 +1574,21 @@ class Component extends DCLogic {
       {v:'ca_chuyen', t:'Buôn chuyến', cond:'', lic:[]},
     ];
     const isCanhanLH = st.onboard.loaiHinh === 'canhan';
-    const nganhCatalog = isCanhanLH ? CANHAN_NGANH : NGANH_OPTS;
-    const nganhChips = st.nganhBaokim.map((c,i)=>({ idx:i, label:c.label }));
+    const BKN = window.BK_NGANH || { hkd: [], canhan: [] };
+    if (!this._nganhCat) {
+      const licByCond = {}; NGANH_OPTS.forEach(o => { if (o.cond && o.lic && o.lic.length) licByCond[o.cond.toLowerCase()] = o.lic; });
+      const withLic = (arr) => arr.map(o => ({ ...o, lic: licByCond[(o.cond||'').replace(/^Chi tiết: /,'').toLowerCase()] || [] }));
+      if (BKN.hkd.length) this._nganhCat = { hkd: withLic(BKN.hkd), canhan: withLic(BKN.canhan) };
+    }
+    const NCAT = this._nganhCat || { hkd: NGANH_OPTS, canhan: CANHAN_NGANH };
+    const nganhCatalog = isCanhanLH ? NCAT.canhan : NCAT.hkd;
+    const nganhChips = st.nganhBaokim.map((c,i)=>({ idx:i, label:c.label, detail:c.detail||'', isKhac: /_k$/.test(c.key) || c.key==='n_khac' || c.key==='ca_khac' || /^ca_(rong|vat|quavat|chuyen|dichvu|doclap|luudong)$/.test(c.key) || /^other_/.test(c.key) }));
     // ---- giấy phép con theo ngành nghề đã chọn (hiển thị ở Bước 3) ----
     const licStatusMap = st.licenseStatus || {};
     const licFilesMap = st.licenseFiles || {};
     const licenseReqs = [];
     st.nganhBaokim.forEach((ch) => {
-      const opt = NGANH_OPTS.find(o => o.v === ch.key);
+      const opt = NCAT.hkd.find(o => o.v === ch.key) || NCAT.canhan.find(o => o.v === ch.key);
       const lics = (ch.lic && ch.lic.length) ? ch.lic : ((opt && opt.lic) || []);
       lics.forEach((lic, li) => {
         const id = ch.key + '__' + li;
@@ -1589,7 +1600,7 @@ class Component extends DCLogic {
     const nganhOpen = st.nganhListOpen || nganhQ.length > 0;
     const nganhBase = nganhCatalog.filter(o => o.v !== 'khac' && !st.nganhBaokim.some(x=>x.key===o.v));
     const nganhSuggestions = nganhOpen
-      ? (nganhQ ? nganhBase.filter(o => (o.t + ' ' + (o.cond||'') + ' ' + (o.lic||[]).join(' ')).toLowerCase().includes(nganhQ)) : nganhBase).slice(0, 120).map(o=>({ ...o, licHint: (o.lic&&o.lic.length)? ('Giấy phép con: ' + o.lic.join('; ')) : 'Không yêu cầu giấy phép con' }))
+      ? (nganhQ ? nganhBase.filter(o => (o.t + ' ' + (o.cond||'') + ' ' + (o.lic||[]).join(' ')).toLowerCase().includes(nganhQ)) : nganhBase).slice(0, 120).map(o=>({ ...o, hasLic: !!(o.lic&&o.lic.length), licHint: (o.lic&&o.lic.length)? ('Giấy phép con: ' + o.lic.join('; ')) : '' }))
       : [];
     const thuThapOpts = [ {v:'co',t:'Có thu thập'},{v:'cokhongchiase',t:'Có thu thập nhưng không chia sẻ'},{v:'khong',t:'Không thu thập'} ].map(o=>({ ...o, checked: st.thuThap===o.v }));
 
@@ -1860,7 +1871,7 @@ class Component extends DCLogic {
           const linkOk = (x)=> (x||'').trim().toLowerCase().replace(/\/+$/,'').endsWith('online.gov.vn');
           const checkTmdt = (label, it) => {
             if (!it.tmdtStatus) { probs.push(label+' chưa chọn trạng thái đăng ký TMĐT'); return; }
-            if (it.tmdtStatus==='dadangky' && !linkOk(it.tmdtLink)) probs.push(label+' (Đã đăng ký) cần link minh chứng có đuôi .online.gov.vn');
+            if (it.tmdtStatus==='dadangky' && !linkOk(it.tmdtLink)) probs.push(label+' (Đã thực hiện) cần link minh chứng có đuôi .online.gov.vn');
             if (it.tmdtStatus==='dangthuchien' && !it.tmdtImg) probs.push(label+' (Đang thực hiện) cần upload file minh chứng');
           };
           const reqText = (label, v, field) => { if(!(v||'').toString().trim()) probs.push(label+' chưa nhập '+field); };
@@ -1911,6 +1922,7 @@ class Component extends DCLogic {
         ? 'Chọn loại hình buôn bán của cá nhân. Nếu không có trong danh sách, gõ và chọn "Thêm" để tự nhập.'
         : 'Gõ mã hoặc tên ngành nghề cấp 4 (Cổng đăng ký kinh doanh quốc gia) để tìm. Được chọn nhiều ngành nghề; nếu không có trong danh sách, gõ và chọn "Thêm" để tự nhập.',
       nganhQuery: st.nganhQuery,
+      onNganhDetail: (e) => { const i=+e.currentTarget.dataset.idx, v=e.target.value; this.setState(s=>({ nganhBaokim: s.nganhBaokim.map((c,j)=> j===i ? {...c, detail:v} : c) })); },
       nganhSuggestions: nganhSuggestions,
       showNganhSuggest: nganhOpen,
       nganhListOpen: st.nganhListOpen,
@@ -1918,7 +1930,7 @@ class Component extends DCLogic {
       nganhNoResult: st.nganhQuery.trim().length > 0 && nganhSuggestions.length === 0,
       onToggleNganhList: () => this.setState(s => ({ nganhListOpen: !s.nganhListOpen })),
       onNganhQuery: (e) => this.setState({ nganhQuery: e.target.value, nganhListOpen: true }),
-      onPickNganh: (e) => { const v=e.currentTarget.dataset.key; const opt=nganhCatalog.find(o=>o.v===v); if(!opt)return; this.setState(s=> s.nganhBaokim.some(x=>x.key===v)? {nganhQuery:'',nganhListOpen:false} : ({ nganhBaokim:[...s.nganhBaokim,{key:v,label:opt.t,lic:opt.lic||[]}], nganhQuery:'', nganhListOpen:false }) ); },
+      onPickNganh: (e) => { const v=e.currentTarget.dataset.key; const opt=nganhCatalog.find(o=>o.v===v); if(!opt)return; this.setState(s=> s.nganhBaokim.some(x=>x.key===v)? {nganhQuery:'',nganhListOpen:false} : ({ nganhBaokim:[...s.nganhBaokim,{key:v,label:opt.t + (opt.cond ? ' (' + opt.cond + ')' : ''),lic:opt.lic||[]}], nganhQuery:'', nganhListOpen:false }) ); },
       onAddNganhFree: () => { const t=(this.state.nganhQuery||'').trim(); if(!t)return; this.setState(s=>({ nganhBaokim:[...s.nganhBaokim,{key:'other_'+Date.now(),label:t}], nganhQuery:'', nganhListOpen:false })); },
       onRemoveNganh: (e) => { const i=+e.currentTarget.dataset.idx; this.setState(s=>({ nganhBaokim: s.nganhBaokim.filter((_,j)=>j!==i) })); },
       licenseReqs,
