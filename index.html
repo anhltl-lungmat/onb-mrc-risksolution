@@ -1593,7 +1593,7 @@ class Component extends DCLogic {
     });
     const nganhQ = (st.nganhQuery||'').trim().toLowerCase();
     const nganhOpen = st.nganhListOpen || nganhQ.length > 0;
-    const nganhBase = nganhCatalog.filter(o => o.v !== 'khac' && !st.nganhBaokim.some(x=>x.key===o.v));
+    const nganhBase = nganhCatalog.filter(o => o.v !== 'khac' && ((/_k$/.test(o.v)||o.v==='n_khac'||o.v==='ca_khac'||/^ca_(rong|vat|quavat|chuyen|dichvu|doclap|luudong)$/.test(o.v))||!st.nganhBaokim.some(x=>x.key===o.v)));
     const nganhSuggestions = nganhOpen
       ? (nganhQ ? nganhBase.filter(o => (o.t + ' ' + (o.cond||'') + ' ' + (o.lic||[]).join(' ')).toLowerCase().includes(nganhQ)) : nganhBase).slice(0, 120).map(o=>({ ...o, hasLic: !!(o.lic&&o.lic.length), licHint: (o.lic&&o.lic.length)? ('Giấy phép con: ' + o.lic.join('; ')) : '' }))
       : [];
@@ -1925,7 +1925,7 @@ class Component extends DCLogic {
       nganhNoResult: st.nganhQuery.trim().length > 0 && nganhSuggestions.length === 0,
       onToggleNganhList: () => this.setState(s => ({ nganhListOpen: !s.nganhListOpen })),
       onNganhQuery: (e) => this.setState({ nganhQuery: e.target.value, nganhListOpen: true }),
-      onPickNganh: (e) => { const v=e.currentTarget.dataset.key; const opt=nganhCatalog.find(o=>o.v===v); if(!opt)return; this.setState(s=> s.nganhBaokim.some(x=>x.key===v)? {nganhQuery:'',nganhListOpen:false} : ({ nganhBaokim:[...s.nganhBaokim,{key:v,label:opt.t + (opt.cond ? ' (' + opt.cond + ')' : ''),lic:opt.lic||[]}], nganhQuery:'', nganhListOpen:false }) ); },
+      onPickNganh: (e) => { const v=e.currentTarget.dataset.key; const opt=nganhCatalog.find(o=>o.v===v); if(!opt)return; this.setState(s=> (!(/_k$/.test(v)||v==='n_khac'||v==='ca_khac'||/^ca_(rong|vat|quavat|chuyen|dichvu|doclap|luudong)$/.test(v))&&s.nganhBaokim.some(x=>x.key===v))? {nganhQuery:'',nganhListOpen:false} : ({ nganhBaokim:[...s.nganhBaokim,{key:v,label:opt.t + (opt.cond ? ' (' + opt.cond + ')' : ''),lic:opt.lic||[]}], nganhQuery:'', nganhListOpen:false }) ); },
       onAddNganhFree: () => { const t=(this.state.nganhQuery||'').trim(); if(!t)return; this.setState(s=>({ nganhBaokim:[...s.nganhBaokim,{key:'other_'+Date.now(),label:t}], nganhQuery:'', nganhListOpen:false })); },
       onRemoveNganh: (e) => { const i=+e.currentTarget.dataset.idx; this.setState(s=>({ nganhBaokim: s.nganhBaokim.filter((_,j)=>j!==i) })); },
       licenseReqs,
